@@ -22,33 +22,6 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        val batteryUsage = BatteryUsage(this)
-
-
-        val batteryPercentArray: MutableList<BatteryModel> = ArrayList()
-        for (item in batteryUsage.getUsageStateList()) {
-            if (item.totalTimeInForeground > 0) {
-                val bm = BatteryModel()
-                bm.packageName = item.packageName
-                bm.percentUsage =
-                    (item.totalTimeInForeground.toFloat() / batteryUsage.getTotalTime()
-                        .toFloat() * 100).toInt()
-                batteryPercentArray += bm
-            }
-        }
-        var sortedList = batteryPercentArray
-            .groupBy { it.packageName }
-            .mapValues { entry -> entry.value.sumBy { it.percentUsage } }.toList()
-            .sortedWith(compareBy { it.second }).reversed()
-
-        for (item in sortedList) {
-            val timePerApp = item.second.toFloat() / 100 * batteryUsage.getTotalTime() / 1000 / 60
-            val hour = timePerApp / 60
-            val min = timePerApp % 60
-            Log.e("3636", "${item.first}  :  ${item.second} time usage is : ${hour.roundToInt()} : ${min.roundToInt()} ")
-        }
-
-
 
         registerReceiver(batteryInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
     }
