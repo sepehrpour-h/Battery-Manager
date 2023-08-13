@@ -20,10 +20,8 @@ class BatteryUsage(context: Context) {
 
     fun getUsageStateList(): List<UsageStats> {
         val usm = getUsageStateManager(myContext)
-        val calendar = Calendar.getInstance()
-        val endTime = calendar.timeInMillis
-        calendar.add(Calendar.YEAR, -1)
-        val startTime = calendar.timeInMillis
+        val endTime = System.currentTimeMillis()
+        val startTime = System.currentTimeMillis() - 24 * 3600 * 1000
         return usm.queryUsageStats(UsageStatsManager.INTERVAL_DAILY, startTime, endTime)
     }
 
