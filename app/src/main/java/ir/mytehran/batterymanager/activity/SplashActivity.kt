@@ -1,20 +1,21 @@
-package ir.mytehran.batterymanager
+package ir.mytehran.batterymanager.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.TextView
+import ir.mytehran.batterymanager.databinding.ActivitySplashBinding
 import java.util.Timer
 import kotlin.concurrent.timerTask
 
 class SplashActivity : AppCompatActivity() {
 
-    private lateinit var helpTxt: TextView
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
-        helpTxt = findViewById<TextView>(R.id.help_txt)
 
         var textArray = arrayOf(
             "Make Your Battery Powerful",
@@ -40,7 +41,7 @@ class SplashActivity : AppCompatActivity() {
     private fun helpTextGenerator(delayTime: Long, helpText: String) {
         Timer().schedule(timerTask {
             runOnUiThread(timerTask {
-                helpTxt.text = helpText
+                binding.helpTxt.text = helpText
             })
         }, delayTime)
     }
