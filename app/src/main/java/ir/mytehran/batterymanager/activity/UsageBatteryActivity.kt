@@ -37,7 +37,7 @@ class UsageBatteryActivity : AppCompatActivity() {
         }
 
 
-        val adapter = BatteryUsageAdapter(batteryPercentArray, batteryUsage.getTotalTime())
+        val adapter = BatteryUsageAdapter(this, batteryPercentArray, batteryUsage.getTotalTime())
         binding.recyclerview.setHasFixedSize(true)
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
         binding.recyclerview.adapter = adapter

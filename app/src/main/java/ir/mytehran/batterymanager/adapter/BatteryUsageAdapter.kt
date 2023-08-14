@@ -1,9 +1,15 @@
 package ir.mytehran.batterymanager.adapter
 
+import android.content.Context
+import android.content.pm.ApplicationInfo
+import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ir.mytehran.batterymanager.R
@@ -11,6 +17,7 @@ import ir.mytehran.batterymanager.model.BatteryModel
 import kotlin.math.roundToInt
 
 class BatteryUsageAdapter(
+    private val context: Context,
     private val battery: MutableList<BatteryModel>,
     private val totalTime: Long
 ) :
@@ -33,9 +40,10 @@ class BatteryUsageAdapter(
 
     override fun onBindViewHolder(holder: BatteryUsageAdapter.ViewHolder, position: Int) {
         holder.txtPercent.text = batteryFinalList[position].percentUsage.toString() + "%"
-
-        holder.txtTime.text =batteryFinalList[position].timeusage
-           // "${batteryFinalList[position].packageName} : ${} : ${}"
+        holder.txtTime.text = batteryFinalList[position].timeusage
+        holder.txtAppName.text= getAppName(batteryFinalList[position].packageName.toString())
+        holder.progressbar.progress = batteryFinalList[position].percentUsage
+        holder.imageview.setImageDrawable(getAppIcon(batteryFinalList[position].packageName.toString()))
     }
 
     override fun getItemCount(): Int {
@@ -45,6 +53,9 @@ class BatteryUsageAdapter(
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var txtPercent: TextView = view.findViewById(R.id.txt_percent)
         var txtTime: TextView = view.findViewById(R.id.txt_time)
+        var txtAppName: TextView = view.findViewById(R.id.txt_app_name)
+        var progressbar: ProgressBar = view.findViewById(R.id.progressbar)
+        var imageview: ImageView = view.findViewById(R.id.imageView)
     }
 
     fun calcBatteryUsage(batteryPercentArray: MutableList<BatteryModel>): MutableList<BatteryModel> {
@@ -66,6 +77,26 @@ class BatteryUsageAdapter(
             finalList += bm
         }
         return finalList
+    }
+
+    fun getAppName (packageName:String) : String{
+        val pm = context.applicationContext.packageManager
+        val ai : ApplicationInfo? = try {
+            pm.getApplicationInfo(packageName, 0)
+        }catch (e: PackageManager.NameNotFoundException){
+            null
+        }
+        return (if (ai != null) pm.getApplicationLabel(ai) else "(unknown)") as String
+    }
+
+    fun getAppIcon (packageName: String) : Drawable? {
+        var icon : Drawable? = null
+        try {
+            icon = context.packageManager.getApplicationIcon(packageName)
+        }catch (e: PackageManager.NameNotFoundException){
+            e.printStackTrace()
+        }
+        return icon
     }
 
 }

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.UsageBatteryActivity">
+    tools:context=".activity.UsageBatteryActivity"
+    android:background="@color/purple_700">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
