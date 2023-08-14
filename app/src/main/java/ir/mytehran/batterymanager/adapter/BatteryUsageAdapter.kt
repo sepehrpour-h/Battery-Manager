@@ -32,7 +32,10 @@ class BatteryUsageAdapter(
     }
 
     override fun onBindViewHolder(holder: BatteryUsageAdapter.ViewHolder, position: Int) {
-        holder.test.text = "${batteryFinalList[position].packageName} : ${batteryFinalList[position].percentUsage} : ${batteryFinalList[position].timeusage}"
+        holder.txtPercent.text = batteryFinalList[position].percentUsage.toString() + "%"
+
+        holder.txtTime.text =batteryFinalList[position].timeusage
+           // "${batteryFinalList[position].packageName} : ${} : ${}"
     }
 
     override fun getItemCount(): Int {
@@ -40,7 +43,8 @@ class BatteryUsageAdapter(
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var test: TextView = view.findViewById(R.id.test)
+        var txtPercent: TextView = view.findViewById(R.id.txt_percent)
+        var txtTime: TextView = view.findViewById(R.id.txt_time)
     }
 
     fun calcBatteryUsage(batteryPercentArray: MutableList<BatteryModel>): MutableList<BatteryModel> {
@@ -58,7 +62,7 @@ class BatteryUsageAdapter(
             val min = timePerApp % 60
             bm.packageName = item.first
             bm.percentUsage = item.second
-            bm.timeusage = "${hour.roundToInt()} : ${min.roundToInt()}"
+            bm.timeusage = "${hour.roundToInt()} hour ${min.roundToInt()} minutes"
             finalList += bm
         }
         return finalList
