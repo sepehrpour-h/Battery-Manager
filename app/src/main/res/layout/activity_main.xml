@@ -114,7 +114,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/base_guideline"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/g1"
@@ -159,12 +159,13 @@
             app:layout_constraintGuide_percent="0.05" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/info_title"
             android:textColor="@color/info_title_color"
-            android:textStyle="bold"
             android:textSize="@dimen/normal_text"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/g1"
             app:layout_constraintEnd_toStartOf="@+id/g6"
             app:layout_constraintStart_toStartOf="@+id/g7"
@@ -212,20 +213,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
             android:text="@string/technology"
             android:textColor="@color/alpha_text_color"
             android:textSize="@dimen/normal_text"
-            android:layout_marginStart="@dimen/margin_large"
             app:layout_constraintStart_toEndOf="@+id/img2"
             app:layout_constraintTop_toTopOf="@+id/img2" />
 
         <TextView
+            android:id="@+id/txt_technology"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_technology"
+            android:layout_marginStart="@dimen/margin_large"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_marginStart="@dimen/margin_large"
             app:layout_constraintBottom_toBottomOf="@+id/img2"
             app:layout_constraintStart_toEndOf="@+id/img2" />
 
@@ -241,18 +242,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
             android:text="@string/plug_in"
             android:textColor="@color/alpha_text_color"
             android:textSize="@dimen/normal_text"
-            android:layout_marginStart="@dimen/margin_large"
             app:layout_constraintStart_toEndOf="@+id/img3"
             app:layout_constraintTop_toTopOf="@+id/img3" />
 
         <TextView
+            android:id="@+id/txt_plug"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_large"
-            android:id="@+id/txt_plug"
             android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/img3"
@@ -270,20 +271,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
             android:text="@string/temperature"
             android:textColor="@color/alpha_text_color"
             android:textSize="@dimen/normal_text"
-            android:layout_marginStart="@dimen/margin_large"
             app:layout_constraintStart_toEndOf="@+id/img4"
             app:layout_constraintTop_toTopOf="@+id/img4" />
 
         <TextView
+            android:id="@+id/txt_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txt_temp"
+            android:layout_marginStart="@dimen/margin_large"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:layout_marginStart="@dimen/margin_large"
             app:layout_constraintBottom_toBottomOf="@+id/img4"
             app:layout_constraintStart_toEndOf="@+id/img4" />
 
@@ -305,13 +306,55 @@
             app:layout_constraintStart_toStartOf="@+id/g7" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:background="@color/line"
             android:layout_marginStart="@dimen/margin_large"
+            android:background="@color/line"
             app:layout_constraintBottom_toTopOf="@+id/g2"
             app:layout_constraintEnd_toStartOf="@+id/g6"
-            app:layout_constraintStart_toStartOf="@+id/g5" />
+            app:layout_constraintStart_toStartOf="@+id/g5"
+            android:orientation="horizontal" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/margin_xlarge"
+            android:background="@drawable/health_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/g3">
+
+            <ImageView
+                android:id="@+id/img_health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cpu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_health"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+            <TextView
+                android:id="@+id/txt_health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_large"
+                android:text="asaddsd"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/img_health"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
