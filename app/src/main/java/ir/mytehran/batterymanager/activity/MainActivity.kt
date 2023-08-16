@@ -8,6 +8,7 @@ import android.os.BatteryManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import ir.mytehran.batterymanager.utils.BatteryUsage
 import ir.mytehran.batterymanager.databinding.ActivityMainBinding
 import ir.mytehran.batterymanager.model.BatteryModel
@@ -22,6 +23,14 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        binding.imgMenu.setOnClickListener{
+            binding.drawer.openDrawer(Gravity.RIGHT)
+        }
+
+        binding.incDrawer.txtAppUsage.setOnClickListener{
+            startActivity(Intent(this@MainActivity, UsageBatteryActivity::class.java))
+            binding.drawer.closeDrawer(Gravity.RIGHT)
+        }
 
         registerReceiver(batteryInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
     }
