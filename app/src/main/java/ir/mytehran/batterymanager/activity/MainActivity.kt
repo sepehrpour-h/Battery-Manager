@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
+import androidx.core.content.ContextCompat
 import ir.mytehran.batterymanager.R
 import ir.mytehran.batterymanager.utils.BatteryUsage
 import ir.mytehran.batterymanager.databinding.ActivityMainBinding
 import ir.mytehran.batterymanager.model.BatteryModel
+import ir.mytehran.batterymanager.service.BatteryAlarmService
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        startService()
+
         binding.imgMenu.setOnClickListener {
             binding.drawer.openDrawer(Gravity.RIGHT)
         }
@@ -36,6 +40,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         registerReceiver(batteryInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+    }
+
+    private fun startService(){
+        val serviceIntent = Intent(this, BatteryAlarmService::class.java)
+        ContextCompat.startForegroundService(this, serviceIntent)
     }
 
     private var batteryInfoReceiver: BroadcastReceiver = object : BroadcastReceiver() {

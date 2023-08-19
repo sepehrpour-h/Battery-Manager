@@ -7,10 +7,13 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.core.app.NotificationCompat
+import ir.mytehran.batterymanager.R
 
 class BatteryAlarmService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        createNotificationChannel()
+        startNotification()
         return START_STICKY
     }
 
@@ -30,6 +33,11 @@ class BatteryAlarmService : Service() {
     private fun startNotification() {
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("My Title")
+            .setContentText("this is my content")
+            .setSmallIcon(R.drawable.health_good)
+            .build()
+
+        startForeground(1, notification)
     }
 
     companion object {
